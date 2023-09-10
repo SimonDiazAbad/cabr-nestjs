@@ -24,8 +24,3 @@ services:
     image: mongo
     ports:
       - 27017:27017
-
-  nginx:
-    image: nginx
-    ports:
-      - 80:80
