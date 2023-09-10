@@ -3,22 +3,29 @@ services:
     build:
       context: .
       dockerfile: ./apps/reservations/Dockerfile
-      target: development
-    command: pnpm run start:dev reservations
+      target: production
+    command: pnpm run start:dev reservations --host 0.0.0.0
     ports:
-      - 3000:3000
+      - 3001:3001
     volumes:
       - .:/usr/src/app
   auth:
     build:
       context: .
       dockerfile: ./apps/auth/Dockerfile
-      target: development
+      target: production
     command: pnpm run start:dev auth
     ports:
-      - 3001:3001
+      - 3000:3000
     volumes:
       - .:/usr/src/app
 
   mongo:
     image: mongo
+    ports:
+      - 27017:27017
+
+  nginx:
+    image: nginx
+    ports:
+      - 80:80
