@@ -7,6 +7,6 @@ export class UsersService {
   constructor(private readonly usersRepository: UsersRepository) {}
 
   async create(createUserDto: CreateUserDto) {
-    this.usersRepository.create(createUserDto);
+    return this.usersRepository.create(createUserDto);
   }
 }
