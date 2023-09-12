@@ -3,8 +3,8 @@ services:
     build:
       context: .
       dockerfile: ./apps/reservations/Dockerfile
-      target: production
-    command: pnpm run start:dev reservations --host 0.0.0.0
+      target: development
+    command: pnpm run start:dev reservations
     env_file:
       - ./apps/reservations/.env
     ports:
@@ -15,7 +15,7 @@ services:
     build:
       context: .
       dockerfile: ./apps/auth/Dockerfile
-      target: production
+      target: development
     command: pnpm run start:dev auth
     env_file:
       - ./apps/auth/.env
