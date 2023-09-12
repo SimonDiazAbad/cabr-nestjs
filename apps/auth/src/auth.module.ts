@@ -11,15 +11,6 @@ import * as Joi from 'joi';
   imports: [
     UsersModule,
     LoggerModule,
-    JwtModule.registerAsync({
-      useFactory: (configService: ConfigService) => ({
-        secret: configService.get<string>('JWT_SECRET'),
-        signOptions: {
-          expiresIn: `${configService.get<string>('JWT_EXPIRATION')}s`,
-        },
-      }),
-      inject: [ConfigService],
-    }),
     ConfigModule.forRoot({
       isGlobal: true,
       validationSchema: Joi.object({
@@ -28,6 +19,15 @@ import * as Joi from 'joi';
         JWT_EXPIRATION: Joi.string().required(),
         PORT: Joi.number().required(),
       }),
+    }),
+    JwtModule.registerAsync({
+      useFactory: (configService: ConfigService) => ({
+        secret: configService.get<string>('JWT_SECRET'),
+        signOptions: {
+          expiresIn: `${configService.get<string>('JWT_EXPIRATION')}s`,
+        },
+      }),
+      inject: [ConfigService],
     }),
   ],
   controllers: [AuthController],
