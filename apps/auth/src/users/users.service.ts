@@ -8,13 +8,6 @@ export class UsersService {
   constructor(private readonly usersRepository: UsersRepository) {}
 
   async create(createUserDto: CreateUserDto) {
-    console.log('password', createUserDto.password);
-    try {
-      const hashedPasword = await hash(createUserDto.password, 10);
-      console.log('hashedPasword', hashedPasword);
-    } catch (error) {
-      console.log(error);
-    }
     return this.usersRepository.create({
       ...createUserDto,
       password: await hash(createUserDto.password, 10),
