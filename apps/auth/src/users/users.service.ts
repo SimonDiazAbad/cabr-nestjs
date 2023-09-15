@@ -1,19 +1,33 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { Inject, Injectable, UnauthorizedException } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UsersRepository } from './users.repository';
 import { hash, compare } from 'bcryptjs';
 import { GetUserDto } from './dto/get-user.dto';
+import { NOTIFICATIONS_SERVICE } from '@app/common';
+import { ClientProxy } from '@nestjs/microservices';
 
 @Injectable()
 export class UsersService {
-  constructor(private readonly usersRepository: UsersRepository) {}
+  constructor(
+    private readonly usersRepository: UsersRepository,
+    @Inject(NOTIFICATIONS_SERVICE)
+    private readonly notificationsService: ClientProxy,
+  ) {}
 
   async create(createUserDto: CreateUserDto) {
     await this.validateCreateUserDto(createUserDto);
-    return this.usersRepository.create({
+
+    const createdUser = await this.usersRepository.create({
       ...createUserDto,
       password: await hash(createUserDto.password, 10),
     });
+
+    this.notificationsService.emit('notify_email', {
+      email: createdUser.email,
+      text: `Thank you for registering with Cabr.`,
+    });
+
+    return createdUser;
   }
 
   async validateCreateUserDto(createUserDto: CreateUserDto) {
