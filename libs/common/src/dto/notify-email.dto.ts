@@ -5,5 +5,8 @@ export class NotifyEmailDto {
   email: string;
 
   @IsString()
+  subject: string;
+
+  @IsString()
   text: string;
 }

@@ -3,7 +3,7 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UsersRepository } from './users.repository';
 import { hash, compare } from 'bcryptjs';
 import { GetUserDto } from './dto/get-user.dto';
-import { NOTIFICATIONS_SERVICE } from '@app/common';
+import { NOTIFICATIONS_SERVICE, NotifyEmailDto } from '@app/common';
 import { ClientProxy } from '@nestjs/microservices';
 
 @Injectable()
@@ -22,10 +22,13 @@ export class UsersService {
       password: await hash(createUserDto.password, 10),
     });
 
-    this.notificationsService.emit('notify_email', {
+    const emailNotificationDto: NotifyEmailDto = {
       email: createdUser.email,
+      subject: 'Welcome to Cabr!',
       text: `Thank you for registering with Cabr.`,
-    });
+    };
+
+    this.notificationsService.emit('notify_email', emailNotificationDto);
 
     return createdUser;
   }

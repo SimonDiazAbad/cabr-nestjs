@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { NotifyEmailDto } from '../dto/notify-email.dto';
+import { NotifyEmailDto } from '../../../libs/common/src/dto/notify-email.dto';
 import { createTransport } from 'nodemailer';
 import { ConfigService } from '@nestjs/config';
 
@@ -17,11 +17,11 @@ export class NotificationsService {
       refreshToken: this.configService.get('GOOGLE_OAUTH_REFRESH_TOKEN'),
     },
   });
-  async notifyEmail({ email, text }: NotifyEmailDto) {
+  async notifyEmail({ email, text, subject }: NotifyEmailDto) {
     await this.transporter.sendMail({
       from: this.configService.get('SMTP_USER'),
       to: email,
-      subject: 'Cabr notification',
+      subject,
       text,
     });
   }
