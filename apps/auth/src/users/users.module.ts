@@ -6,7 +6,7 @@ import {
   LoggerModule,
   NOTIFICATIONS_SERVICE,
 } from '@app/common';
-import { UserDocument, UserSchema } from './models/users.schema';
+import { UserDocument, UserSchema } from '@app/common';
 import { UsersRepository } from './users.repository';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import * as Joi from 'joi';
