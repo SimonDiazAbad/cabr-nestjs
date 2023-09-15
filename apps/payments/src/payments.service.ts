@@ -20,7 +20,7 @@ export class PaymentsService {
     private readonly notificationsService: ClientProxy,
   ) {}
 
-  async createCharge({ card, amount }: PaymentsCreateChargeDto) {
+  async createCharge({ card, amount, email }: PaymentsCreateChargeDto) {
     // const paymentMethod = await this.stripe.paymentMethods.create({
     //   type: 'card',
     //   card,
