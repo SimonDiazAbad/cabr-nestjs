@@ -7,7 +7,7 @@ steps:
         '-t',
         'us-east4-docker.pkg.dev/cabr-399120/reservations/production',
         '-f',
-        'apps/reservations/DockerFile',
+        'apps/reservations/Dockerfile',
         '.',
       ]
   - name: 'gcr.io/cloud-builders/docker'
@@ -22,7 +22,7 @@ steps:
         '-t',
         'us-east4-docker.pkg.dev/cabr-399120/auth/production',
         '-f',
-        'apps/auth/DockerFile',
+        'apps/auth/Dockerfile',
         '.',
       ]
   - name: 'gcr.io/cloud-builders/docker'
@@ -36,7 +36,7 @@ steps:
         '-t',
         'us-east4-docker.pkg.dev/cabr-399120/notifications/production',
         '-f',
-        'apps/notifications/DockerFile',
+        'apps/notifications/Dockerfile',
         '.',
       ]
   - name: 'gcr.io/cloud-builders/docker'
@@ -51,7 +51,7 @@ steps:
         '-t',
         'us-east4-docker.pkg.dev/cabr-399120/payments/production',
         '-f',
-        'apps/payments/DockerFile',
+        'apps/payments/Dockerfile',
         '.',
       ]
   - name: 'gcr.io/cloud-builders/docker'
