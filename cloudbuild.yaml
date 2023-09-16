@@ -1,0 +1,58 @@
+steps:
+  # reservations
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      [
+        'build',
+        '-t',
+        'us-east4-docker.pkg.dev/cabr-399120/reservations/production',
+        '-f',
+        'apps/reservations/DockerFile',
+        '.',
+      ]
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      ['push', 'us-east4-docker.pkg.dev/cabr-399120/reservations/production']
+
+  # auth
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      [
+        'build',
+        '-t',
+        'us-east4-docker.pkg.dev/cabr-399120/auth/production',
+        '-f',
+        'apps/auth/DockerFile',
+        '.',
+      ]
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'us-east4-docker.pkg.dev/cabr-399120/auth/production']
+
+  # notifications
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      [
+        'build',
+        '-t',
+        'us-east4-docker.pkg.dev/cabr-399120/notifications/production',
+        '-f',
+        'apps/notifications/DockerFile',
+        '.',
+      ]
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      ['push', 'us-east4-docker.pkg.dev/cabr-399120/notifications/production']
+
+  # payments
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      [
+        'build',
+        '-t',
+        'us-east4-docker.pkg.dev/cabr-399120/payments/production',
+        '-f',
+        'apps/payments/DockerFile',
+        '.',
+      ]
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'us-east4-docker.pkg.dev/cabr-399120/payments/production']
