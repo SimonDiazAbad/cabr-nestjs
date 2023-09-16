@@ -31,6 +31,7 @@ services:
     command: pnpm run start:dev payments
     env_file:
       - ./apps/payments/.env
+      - 3003:3003
     volumes:
       - .:/usr/src/app
   notifications:
