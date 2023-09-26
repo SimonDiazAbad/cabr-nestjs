@@ -11,20 +11,32 @@ describe('Health', () => {
     expect(response.ok).toBeTruthy();
   });
 
-  it('Payments', async (done) => {
+  it('Payments', (done) => {
     ping(
       {
         address: 'payments',
         port: 3003,
       },
-      (error, response) => {
+      (error) => {
         if (error) {
-          fail(error);
-        } else {
-          console.log(response);
-          expect(response).toBeTruthy();
-          done();
+          fail();
         }
+        done();
+      },
+    );
+  });
+
+  it('Notifications', (done) => {
+    ping(
+      {
+        address: 'notifications',
+        port: 3004,
+      },
+      (error) => {
+        if (error) {
+          fail();
+        }
+        done();
       },
     );
   });
