@@ -41,7 +41,7 @@ export class JwtAuthGuard implements CanActivate {
         tap((res) => {
           if (roles) {
             for (const role of roles) {
-              if (!res.roles?.includes(role)) {
+              if (!res.roles?.map((role) => role.name).includes(role)) {
                 throw new UnauthorizedException();
               }
             }
