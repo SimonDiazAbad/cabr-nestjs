@@ -28,5 +28,7 @@ export class AuthService {
       httpOnly: true,
       expires,
     });
+
+    return signedToken;
   }
 }
