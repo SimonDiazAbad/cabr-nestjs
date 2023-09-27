@@ -1,4 +1,4 @@
-import { Column, Entity, ManyToMany } from 'typeorm';
+import { Column, Entity, JoinTable, ManyToMany } from 'typeorm';
 import { AbstractEntity } from '../database';
 import { Role } from './role.entity';
 
@@ -11,5 +11,6 @@ export class User extends AbstractEntity<User> {
   password: string;
 
   @ManyToMany(() => Role, { cascade: true })
+  @JoinTable()
   roles?: Role[];
 }
