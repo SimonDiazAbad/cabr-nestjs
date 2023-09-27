@@ -12,7 +12,7 @@ import { EntityClassOrSchema } from '@nestjs/typeorm/dist/interfaces/entity-clas
         host: configService.getOrThrow('MYSQL_HOST'),
         port: configService.getOrThrow('MYSQL_PORT'),
         database: configService.getOrThrow('MYSQL_DATABASE'),
-        username: configService.getOrThrow('MYSQL_USER'),
+        username: configService.getOrThrow('MYSQL_USERNAME'),
         password: configService.getOrThrow('MYSQL_PASSWORD'),
         synchronize: configService.getOrThrow('MYSQL_SYNCHRONIZE'),
         autoLoadEntities: true,
