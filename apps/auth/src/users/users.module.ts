@@ -6,7 +6,7 @@ import {
   LoggerModule,
   NOTIFICATIONS_SERVICE,
 } from '@app/common';
-import { UserDocument, UserSchema } from '@app/common';
+import { User, UserSchema } from '@app/common';
 import { UsersRepository } from './users.repository';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import * as Joi from 'joi';
@@ -17,7 +17,7 @@ import { ClientsModule, Transport } from '@nestjs/microservices';
     DatabaseModule,
     DatabaseModule.forFeature([
       {
-        name: UserDocument.name,
+        name: User.name,
         schema: UserSchema,
       },
     ]),
