@@ -41,7 +41,7 @@ export class ReservationsController {
   @Get(':id')
   @UseGuards(JwtAuthGuard)
   async findOne(@Param('id') id: string) {
-    return await this.reservationsService.findOne(id);
+    return await this.reservationsService.findOne(+id);
   }
 
   @Patch(':id')
@@ -50,13 +50,13 @@ export class ReservationsController {
     @Param('id') id: string,
     @Body() updateReservationDto: UpdateReservationDto,
   ) {
-    return await this.reservationsService.update(id, updateReservationDto);
+    return await this.reservationsService.update(+id, updateReservationDto);
   }
 
-  @Delete(':id')
+  @Delete(':+id')
   @UseGuards(JwtAuthGuard)
   @Roles(RolesEnum.ADMIN)
   async remove(@Param('id') id: string) {
-    return await this.reservationsService.remove(id);
+    return await this.reservationsService.remove(+id);
   }
 }
