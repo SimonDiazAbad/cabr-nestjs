@@ -47,7 +47,7 @@ export class ReservationsController {
     return await this.reservationsService.update(+id, updateReservationDto);
   }
 
-  @Delete(':+id')
+  @Delete(':id')
   @UseGuards(JwtAuthGuard)
   @Roles(RolesEnum.ADMIN)
   async remove(@Param('id') id: string) {
