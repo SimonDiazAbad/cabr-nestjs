@@ -5,8 +5,9 @@ import {
   DatabaseModule,
   LoggerModule,
   NOTIFICATIONS_SERVICE,
+  Role,
 } from '@app/common';
-import { User, UserSchema } from '@app/common';
+import { User } from '@app/common';
 import { UsersRepository } from './users.repository';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import * as Joi from 'joi';
@@ -15,12 +16,7 @@ import { ClientsModule, Transport } from '@nestjs/microservices';
 @Module({
   imports: [
     DatabaseModule,
-    DatabaseModule.forFeature([
-      {
-        name: User.name,
-        schema: UserSchema,
-      },
-    ]),
+    DatabaseModule.forFeature([User, Role]),
     LoggerModule,
     ConfigModule.forRoot({
       isGlobal: true,

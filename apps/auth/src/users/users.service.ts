@@ -3,7 +3,7 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UsersRepository } from './users.repository';
 import { hash, compare } from 'bcryptjs';
 import { GetUserDto } from './dto/get-user.dto';
-import { NOTIFICATIONS_SERVICE, NotifyEmailDto } from '@app/common';
+import { NOTIFICATIONS_SERVICE, NotifyEmailDto, Role, User } from '@app/common';
 import { ClientProxy } from '@nestjs/microservices';
 
 @Injectable()
@@ -17,10 +17,13 @@ export class UsersService {
   async create(createUserDto: CreateUserDto) {
     await this.validateCreateUserDto(createUserDto);
 
-    const createdUser = await this.usersRepository.create({
+    const user = new User({
       ...createUserDto,
       password: await hash(createUserDto.password, 10),
+      roles: createUserDto.roles?.map((roleDto) => new Role(roleDto)),
     });
+
+    const createdUser = await this.usersRepository.create(user);
 
     const emailNotificationDto: NotifyEmailDto = {
       email: createdUser.email,

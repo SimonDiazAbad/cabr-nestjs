@@ -1,13 +1,12 @@
-import { RolesEnum } from '@app/common';
 import {
   IsArray,
   IsEmail,
-  IsNotEmpty,
   IsOptional,
-  IsString,
   IsStrongPassword,
-  IsEnum,
+  ValidateNested,
 } from 'class-validator';
+import { RoleDto } from './role.dto';
+import { Type } from 'class-transformer';
 
 export class CreateUserDto {
   @IsEmail()
@@ -18,8 +17,7 @@ export class CreateUserDto {
 
   @IsOptional()
   @IsArray()
-  @IsString({ each: true })
-  @IsNotEmpty({ each: true })
-  @IsEnum(RolesEnum, { each: true })
-  roles?: RolesEnum[];
+  @ValidateNested()
+  @Type(() => RoleDto)
+  roles?: RoleDto[];
 }
